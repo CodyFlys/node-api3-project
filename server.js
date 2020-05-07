@@ -8,7 +8,7 @@ server.use(express.json());
 
 
 server.get('/', (req, res) => {
-  res.send({messageoftheday: process.env.MOTD, shouts});
+  res.send({messageoftheday: process.env.MOTD});
 });
 
 //custom middleware
