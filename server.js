@@ -2,7 +2,6 @@ const express = require('express');
 const postRouter = require('./posts/postRouter');
 const userRouter = require('./users/userRouter');
 const server = express();
-require('dotenv').config();
 
 server.use(express.json());
 
