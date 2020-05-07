@@ -21,10 +21,6 @@ function validatePost(req, res, next) {}
 server.use('/api/posts', postRouter);
 server.use('/api/users', userRouter);
 
-server.listen(5000, () => {
-  console.log('Server listening on http://localhost:5000')
-})
-
 server.use((req, res) => {
   res.status(404).json({message: "You have reached an invalid URL"})
 })
