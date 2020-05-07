@@ -66,32 +66,23 @@ router.post('/:id/posts', validateUserId, validatePost, (req, res) => {
   })
 });
 
-router.delete('/:id', validateUserId, (req, res) => {
+router.delete('/:id', validateUserId, validateUser, (req, res) => {
   const id = req.params.id
   db.remove(id)
   .then(res.status(200).json({message: 'User was deleted!'}))
 });
 
-router.put('/:id', validateUserId, (req, res) => {
+router.put('/:id', validateUserId, validateUser, (req, res) => {
   const id = req.params.id
   let post = {
     name: req.body.name,
   }
-
-  if(!req.body.name){
-      res.status(400).json({message: 'provide a name for the update.' })
-  } else {
-      db.update(id, post)
-      .then(post => {
-          if (post) {
-              res.status(200).json(post)
-          } else {
-              res.status(404).json({ message: 'The post with the specified ID does not exist, please try again.' })
-          }
-      }).catch(error => {
-          res.status(500).json({ error: 'The post information could not be modified' })
-      })
-  }
+  db.update(id, post)
+  .then(post => {
+        res.status(200).json(post)
+  }).catch(error => {
+      res.status(500).json({ error: 'The post information could not be modified' })
+  })
 });
 
 
